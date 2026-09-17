@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 from screen_time_battery.model import ScreenTimeBatteryModel
-
+from screen_time_battery.evaluation import evaluate_predictions
 
 def split_dataset(
     screen_time: np.ndarray,
@@ -55,3 +55,27 @@ def train_model(
     predictions = model.predict(screen_time_test)
 
     return model, battery_used_test, predictions
+
+def train_and_evaluate(
+    screen_time: np.ndarray,
+    battery_used: np.ndarray,
+    test_size: float = 0.2,
+    random_state: int = 42,
+) -> tuple[
+    ScreenTimeBatteryModel,
+    dict[str, float],
+]:
+    """Train the model and evaluate held-out predictions."""
+    model, actual, predictions = train_model(
+        screen_time,
+        battery_used,
+        test_size=test_size,
+        random_state=random_state,
+    )
+
+    metrics = evaluate_predictions(
+        actual,
+        predictions,
+    )
+
+    return model, metrics

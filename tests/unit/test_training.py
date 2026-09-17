@@ -2,7 +2,7 @@ import numpy as np
 
 from screen_time_battery.data import load_dataset
 from screen_time_battery.training import split_dataset, train_model
-
+from screen_time_battery.training import train_and_evaluate
 
 def test_split_dataset_is_reproducible() -> None:
     """Test that identical random seeds produce identical splits."""
@@ -36,3 +36,23 @@ def test_train_model_returns_predictions() -> None:
     assert actual.shape == predictions.shape
     assert actual.size == 2
     assert model.coefficient > 0.0
+
+def test_train_and_evaluate_is_reproducible() -> None:
+    """Test that evaluation produces deterministic results."""
+    screen_time, battery_used = load_dataset()
+
+    _, first_metrics = train_and_evaluate(
+        screen_time,
+        battery_used,
+        test_size=0.2,
+        random_state=42,
+    )
+
+    _, second_metrics = train_and_evaluate(
+        screen_time,
+        battery_used,
+        test_size=0.2,
+        random_state=42,
+    )
+
+    assert first_metrics == second_metrics

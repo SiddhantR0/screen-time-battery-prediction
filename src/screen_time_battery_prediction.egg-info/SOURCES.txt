@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/screen_time_battery/__init__.py
+src/screen_time_battery_prediction.egg-info/PKG-INFO
+src/screen_time_battery_prediction.egg-info/SOURCES.txt
+src/screen_time_battery_prediction.egg-info/dependency_links.txt
+src/screen_time_battery_prediction.egg-info/requires.txt
+src/screen_time_battery_prediction.egg-info/top_level.txt

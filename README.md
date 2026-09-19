@@ -100,6 +100,6 @@ pytest -v
 
 ## Limitations
 
-Real battery use also depends on brightness, app load, network activity, background processes, and hardware — none of which this model accounts for. It's a demo of a regression workflow, not a real predictor.
+Real battery use also depends on brightness, app load, network activity, background processes, and hardware. This mode does not account for those. It's built as a hands-on project to learn the fundamentals of machine learning and regression, not a real predictor.
 
 ---
